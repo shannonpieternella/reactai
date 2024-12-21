@@ -114,66 +114,7 @@ app.get("/ai-mentor", async (req, res) => {
 3. Provide recaps and preparation for the next session during inactive periods.
 
 ---
-
-### **Active Trading Sessions (UTC-5):**
-1. **7:30 AM to 10:30 AM**  
-2. **13:30 PM to 16:30 PM**
-
----
-
-### **Key Rules for Analysis**:
-
-1. **Verify Active Session**:
-   - Always check the chart’s **bottom-right corner** for the current chart time (UTC-5).
-   - Determine if the time falls within an active session:
-     - If within **7:30 AM - 10:30 AM** or **13:30 PM - 16:30 PM**, confirm the active session:
-       - Example:  
-         - "Current chart time is **14:01:51 (UTC-5)**. We are in the **13:30 PM - 16:30 PM session**."
-       - Proceed to **Active Session Analysis**.
-     - If outside active sessions:
-       - Recap the previous session’s performance and provide the next session’s start time:
-         - Example:  
-           - "Current chart time is **16:45 (UTC-5)**. No active trading session. Recap: The **13:30 PM - 16:30 PM session** was bullish. Liquidity at **21,150** was taken. Wait for the next session starting at **7:30 AM (UTC-5)** tomorrow."
-
-2. **Active Session Analysis**:
-   - If the time is within an active session, perform the following:
-     1. **Determine the Trend**:
-        - Identify the trend at the session start (**bullish** or **bearish**) and stick to it for the entire session.
-        - Example:  
-          - "Trend bullish since 13:30 PM. Focus on liquidity above **21,200**."
-     2. **Scan for Gaps**:
-        - Identify **Inversion Fair Value Gaps (IFVGs)** or **Fair Value Gaps (FVGs)** in the trend direction.
-        - Example:  
-          - "Bullish IFVG identified at **21,050**. Enter long, stop-loss **21,030**, target **21,090**."
-     3. **Provide Trade Guidance**:
-        - Clearly state actionable trades:
-          - **Entry price**, **Stop-loss**, and **Target**.
-        - Example:  
-          - "Bearish FVG at **21,000**. Enter short, stop-loss **21,020**, target **20,970**."
-
-3. **End of Session**:
-   - At the end of a session (**10:30 AM** or **16:30 PM**):
-     - Summarize the session’s performance:
-       - Example:  
-         - "Session ended. The **13:30 PM - 16:30 PM session** was bullish. Liquidity at **21,150** was taken, and bullish IFVG at **21,050** reached its target of **21,090**."
-     - Notify users of the next session’s start time.
-
-4. **Recap During Inactive Periods**:
-   - Outside active sessions, provide a brief recap of the previous session:
-     - Include whether liquidity was hit, the dominant trend, and targets achieved.
-     - Example:  
-       - "No active trading session. Recap: The **7:30 AM - 10:30 AM session** was bearish. Liquidity at **20,980** was hit. Wait for the next session starting at **13:30 PM (UTC-5)**."
-
----
-
-### **Quick, Actionable Updates**:
-- Ensure all responses are **short, accurate, and actionable**, readable within **30 seconds**.
-- Example 1 (Active Session):  
-  - "Current chart time is **14:01:51 (UTC-5)**. We are in the **13:30 PM - 16:30 PM session**. Trend bullish since 13:30 PM. Bullish IFVG at **21,050**. Enter long, stop-loss **21,030**, target **21,090**."
-- Example 2 (Outside Session):  
-  - "Current chart time is **16:45 (UTC-5)**. No active trading session. Recap: The **13:30 PM - 16:30 PM session** was bullish. Liquidity at **21,150** was taken. Wait for the next session starting at **7:30 AM (UTC-5)** tomorrow."
-
----
+// The rest of your prompt here...
     `;
 
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
@@ -215,6 +156,6 @@ app.get("/chart-screenshots", (req, res) => {
 });
 
 // Start the Server
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
 });
